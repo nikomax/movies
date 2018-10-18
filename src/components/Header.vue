@@ -46,7 +46,6 @@ export default {
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${this.searchString}&page=1&include_adult=false`)
           .then(function (response) {
             self.searchMovies = response.data.results
-            console.log(self.searchMovies)
           })
           .catch(function (error) {
             console.log(error)

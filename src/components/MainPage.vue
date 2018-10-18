@@ -58,7 +58,6 @@ export default {
     const self = this
     axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${this.page}`)
       .then(function (response) {
-        console.log(response.data)
         self.data = response.data
         self.pages = response.data.total_pages
       })

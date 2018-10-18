@@ -9,11 +9,11 @@
         </div>
         <div class="film__col">
           <div class="film__info">
-            <div class="film__info__item"><b>Title:</b> {{data.title}}</div>
-            <div class="film__info__item"><b>Date:</b> {{data.release_date}}</div>
-            <div class="film__info__item"><b>Rate:</b> {{data.vote_average}}</div>
-            <div class="film__info__item"><b>Genres:</b>
-              <a href="javascript:void(0)"
+            <div class="film__info-item"><b>Title:</b> {{data.title}}</div>
+            <div class="film__info-item"><b>Date:</b> {{data.release_date}}</div>
+            <div class="film__info-item"><b>Rate:</b> {{data.vote_average}}</div>
+            <div class="film__info-item"><b>Genres:</b>
+              <a class="film__genre" href="javascript:void(0)"
                  v-for="genre in data.genres"
                  :key="genre.id"
                  @click="openGenreList(genre.id)"
@@ -21,9 +21,9 @@
                 {{genre.name}}
               </a>
             </div>
-            <div class="film__info__item"><b>Budget:</b> {{data.budget}}$</div>
-            <div class="film__info__item"><b>Language:</b> {{data.original_language}}</div>
-            <div class="film__info__item"><b>Overview:</b> {{data.overview}}</div>
+            <div class="film__info-item"><b>Budget:</b> {{data.budget}}$</div>
+            <div class="film__info-item"><b>Language:</b> {{data.original_language}}</div>
+            <div class="film__info-item"><b>Overview:</b> {{data.overview}}</div>
           </div>
         </div>
       </div>
@@ -72,7 +72,6 @@ export default {
       const self = this
       axios.get(`https://api.themoviedb.org/3/movie/${self.itemId}?api_key=${apiKey}`)
         .then(function (response) {
-          console.log(response.data)
           self.data = response.data
         })
         .catch(function (error) {
@@ -80,7 +79,6 @@ export default {
         })
       axios.get(`https://api.themoviedb.org/3/movie/${self.itemId}/similar?api_key=${apiKey}&page=1`)
         .then(function (response) {
-          console.log(response.data)
           self.similarMovies = response.data.results
         })
         .catch(function (error) {
@@ -100,6 +98,23 @@ export default {
     display: flex
   &__col
     width: 50%
+  &__genre
+    position: relative
+    &:hover
+      text-decoration: none
+      transition: 0.3s
+      color: #0874ff
+    &:not(:last-child)
+      padding-right: 5px
+      margin-right: 5px
+      &:after
+        content: ''
+        position: absolute
+        right: 0
+        top: 0
+        height: 100%
+        width: 1px
+        background-color: #989588
 
 .similar-films
   &__title

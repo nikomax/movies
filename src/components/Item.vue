@@ -41,6 +41,15 @@ export default {
 
 <style lang="sass">
 .item
+  text-decoration: none
+  &:hover
+    .item__title
+      color: #0874ff
+    .item__poster
+      img
+        transform: scale(1.1)
+  &__title
+    transition: 0.3s
   &__poster
     overflow: hidden
     position: relative
@@ -48,6 +57,7 @@ export default {
     padding-top: 150%
     margin-bottom: 15px
     img
+      transition: 0.3s
       position: absolute
       top: 0
       left: 0

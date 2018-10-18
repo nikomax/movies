@@ -47,7 +47,6 @@ export default {
       axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${page}&with_genres=${this.genreId}`)
         .then(function (response) {
           self.films = response.data.results
-          console.log(self.films)
         })
         .catch(function (error) {
           console.log(error)
@@ -58,7 +57,6 @@ export default {
     const self = this
     axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${this.page}&with_genres=${this.genreId}`)
       .then(function (response) {
-        console.log(response.data)
         self.films = response.data.results
         self.pages = response.data.total_pages
       })
