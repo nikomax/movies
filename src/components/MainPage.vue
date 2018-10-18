@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main content">
     <div class="container">
       <div class="films">
         <div class="films__item" v-for="film in data.results" :key="film.id">
@@ -52,6 +52,7 @@ export default {
         .catch(function (error) {
           console.log(error)
         })
+      window.scrollTo(0, 0)
     }
   },
   mounted () {

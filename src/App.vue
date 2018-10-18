@@ -23,6 +23,13 @@ export default {
 a
   color: inherit
 
+body
+  margin: 0
+  padding: 0
+
+.content
+  padding-bottom: 60px
+
 .container
   max-width: 1280px
   margin: 0 auto
@@ -31,6 +38,7 @@ a
 .films
   display: flex
   flex-wrap: wrap
+  margin-bottom: 30px
   &__item
     width: 25%
     padding: 10px

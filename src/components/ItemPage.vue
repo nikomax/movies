@@ -1,5 +1,5 @@
 <template>
-  <div class="item-page film">
+  <div class="item-page film content">
     <div class="container">
       <div class="film__row">
         <div class="film__col">
@@ -98,6 +98,11 @@ export default {
     display: flex
   &__col
     width: 50%
+  &__poster
+    margin-right: 50px
+    max-width: 450px
+    img
+      width: 100%
   &__genre
     position: relative
     &:hover

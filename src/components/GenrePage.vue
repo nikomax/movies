@@ -1,5 +1,5 @@
 <template>
-  <div class="genre-page">
+  <div class="genre-page content">
     <div class="container">
       <div class="films">
         <div class="films__item" v-for="film in films" :key="film.id">
@@ -51,6 +51,7 @@ export default {
         .catch(function (error) {
           console.log(error)
         })
+      window.scrollTo(0, 0)
     }
   },
   mounted () {

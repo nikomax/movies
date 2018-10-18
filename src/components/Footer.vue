@@ -12,6 +12,9 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="sass">
+.footer
+  background-color: #0874ff
+  color: #fff
+  padding: 40px 0
 </style>
