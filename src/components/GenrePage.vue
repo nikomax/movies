@@ -1,13 +1,9 @@
 <template>
-  <div class="main">
+  <div class="genre-page">
     <div class="container">
       <div class="films">
-        <div class="films__item" v-for="film in data.results" :key="film.id">
-          <Item
-            :image="film.poster_path"
-            :title="film.title"
-            :id="film.id"
-          />
+        <div class="films__item" v-for="film in films" :key="film.id">
+          <Item :image="film.poster_path" :title="film.title" :id="film.id"/>
         </div>
       </div>
       <paginate
@@ -33,21 +29,25 @@ import Paginate from 'vuejs-paginate'
 const apiKey = '5fc1fc09c4439e9e384f1dce452ba65c'
 
 export default {
-  name: 'Hello',
+  name: 'GenrePage',
   components: {Item, Paginate},
   data () {
     return {
-      data: {},
+      films: [],
       page: 1,
       pages: 0
     }
   },
+  props: {
+    genreId: String
+  },
   methods: {
     loadPage (page) {
       const self = this
-      axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${page}`)
+      axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${page}&with_genres=${this.genreId}`)
         .then(function (response) {
-          self.data = response.data
+          self.films = response.data.results
+          console.log(self.films)
         })
         .catch(function (error) {
           console.log(error)
@@ -56,10 +56,10 @@ export default {
   },
   mounted () {
     const self = this
-    axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${this.page}`)
+    axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${this.page}&with_genres=${this.genreId}`)
       .then(function (response) {
         console.log(response.data)
-        self.data = response.data
+        self.films = response.data.results
         self.pages = response.data.total_pages
       })
       .catch(function (error) {
@@ -69,6 +69,6 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style>
 
 </style>

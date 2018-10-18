@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import MainPage from '@/components/MainPage'
+import ItemPage from '@/components/ItemPage'
+import GenrePage from '@/components/GenrePage'
 
 Vue.use(Router)
 
@@ -14,9 +15,16 @@ export default new Router({
       component: MainPage
     },
     {
-      path: '/HelloWorld',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'movies',
+      path: '/movies/:itemId',
+      component: ItemPage,
+      props: true
+    },
+    {
+      name: 'genre',
+      path: '/genre/:genreId',
+      component: GenrePage,
+      props: true
     }
   ]
 })
