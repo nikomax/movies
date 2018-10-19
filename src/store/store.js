@@ -18,7 +18,6 @@ export const favoriteList = {
 }
 
 let storedFilms = JSON.parse(localStorage.getItem('filmsList'))
-console.log(storedFilms)
 if (storedFilms) {
   favoriteList.list = storedFilms.list
 } else {
