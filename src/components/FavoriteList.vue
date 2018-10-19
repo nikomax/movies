@@ -2,8 +2,15 @@
   <div class="content">
     <div class="container">
       <div class="films" v-if="films.length">
-        <div class="films__item" v-for="film in films" :key="film.id">
-          <Item :image="film.poster_path" :title="film.title" :id="film.id"/>
+        <div
+          class="films__item"
+          v-for="film in films"
+          :key="film.id">
+          <Item
+            :image="film.poster_path"
+            :title="film.title"
+            :id="film.id"
+          />
         </div>
       </div>
       <div v-else>There is no favorite films...</div>

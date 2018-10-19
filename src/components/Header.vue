@@ -9,8 +9,15 @@
             <div class="search">
               <input class="search__input" type="text" @input="search" :value="searchString">
               <div class="search__results" v-if="searchMovies.length">
-                <div class="search__item" v-for="film in searchMovies" :key="film.id">
-                  <Item :image="film.poster_path" :title="film.title" :id="film.id" @click.native="clearSearch()"/>
+                <div class="search__item"
+                     v-for="film in searchMovies"
+                     :key="film.id">
+                  <Item
+                    :image="film.poster_path"
+                    :title="film.title"
+                    :id="film.id"
+                    @click.native="clearSearch()"
+                  />
                 </div>
               </div>
             </div>

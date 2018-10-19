@@ -42,9 +42,15 @@
         <div class="similar-films__title">Similar films</div>
         <div class="similar-films__items">
           <carousel :perPage="5">
-            <slide v-for="film in similarMovies" :key="film.id">
+            <slide
+              v-for="film in similarMovies"
+              :key="film.id">
               <div class="similar-films__item">
-                <Item :image="film.poster_path" :title="film.title" :id="film.id"/>
+                <Item
+                  :image="film.poster_path"
+                  :title="film.title"
+                  :id="film.id"
+                />
               </div>
             </slide>
           </carousel>

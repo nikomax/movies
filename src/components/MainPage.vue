@@ -2,7 +2,9 @@
   <div class="main content">
     <div class="container">
       <div class="films">
-        <div class="films__item" v-for="(film, index) in data.results" :key="film.id">
+        <div class="films__item"
+             v-for="(film, index) in data.results"
+             :key="film.id">
           <Item
             :image="film.poster_path"
             :title="film.title"

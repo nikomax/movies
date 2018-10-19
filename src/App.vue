@@ -9,6 +9,7 @@
 <script>
 import Header from './components/Header'
 import Footer from './components/Footer'
+
 export default {
   name: 'App',
   components: {Footer, Header}
@@ -93,4 +94,5 @@ body
     transform: rotate(-35deg)
   &:after
     transform: rotate(35deg)
+
 </style>
