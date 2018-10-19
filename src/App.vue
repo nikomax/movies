@@ -17,6 +17,10 @@ export default {
 
 <style lang="sass">
 #app
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+  justify-content: space-between
   font-family: 'Avenir', Helvetica, Arial, sans-serif
   color: #2c3e50
 
@@ -28,10 +32,11 @@ body
   padding: 0
 
 .content
+  flex-grow: 1
   padding-bottom: 60px
 
 .container
-  max-width: 1280px
+  max-width: 1080px
   margin: 0 auto
   padding: 0 40px
 
@@ -60,4 +65,32 @@ body
       a
         background-color: #0874ff
         color: #fff
+
+.star
+  position: relative
+  display: inline-block
+  width: 0
+  height: 0
+  margin-left: .9em
+  margin-right: .9em
+  margin-bottom: .8em
+  border-right:  .3em solid transparent
+  border-bottom: .7em  solid #FC0
+  border-left:   .3em solid transparent
+  /* Controlls the size of the stars. */
+  font-size: 10px
+  &:before, &:after
+    content: ''
+    display: block
+    width: 0
+    height: 0
+    position: absolute
+    top: .6em
+    left: -1em
+    border-right:  1em solid transparent
+    border-bottom: .7em  solid #FC0
+    border-left:   1em solid transparent
+    transform: rotate(-35deg)
+  &:after
+    transform: rotate(35deg)
 </style>

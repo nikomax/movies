@@ -15,6 +15,9 @@
               </div>
             </div>
           </div>
+          <div class="header__favorite">
+            <router-link :to="{ path: '/favorite' }">favorite list</router-link>
+          </div>
         </div>
       </div>
     </header>
@@ -23,8 +26,7 @@
 <script>
 import axios from 'axios'
 import Item from './Item'
-
-const apiKey = '5fc1fc09c4439e9e384f1dce452ba65c'
+import { apiKey } from '../store/store'
 
 export default {
   name: 'Header',
@@ -99,8 +101,7 @@ export default {
   &__item
     padding: 5px 10px
     &:hover
-      background-color: #0874ff
-      color: #fff
+      background-color: rgba(0, 0, 0, 0.22)
     .item
       display: flex
       align-items: center

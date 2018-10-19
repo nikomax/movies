@@ -3,8 +3,11 @@
     <div class="container">
       <div class="film__row">
         <div class="film__col">
-          <div class="film__poster">
-            <img :src="`https://image.tmdb.org/t/p/w500/${data.poster_path}`" :alt="data.title">
+          <div class="film__poster-container">
+            <div class="film__poster">
+              <img :src="`https://image.tmdb.org/t/p/w500/${data.poster_path}`" :alt="data.title">
+              <span class="film__favorite" v-if="isFavorite">favorite</span>
+            </div>
           </div>
         </div>
         <div class="film__col">
@@ -25,14 +28,26 @@
             <div class="film__info-item"><b>Language:</b> {{data.original_language}}</div>
             <div class="film__info-item"><b>Overview:</b> {{data.overview}}</div>
           </div>
+          <div class="film__btn">
+            <button @click="addToFavoriteList()" v-if="!isFavorite">
+              add to favorite
+            </button>
+            <button class="remove" @click="removeFromFavoriteList()" v-else>
+              remove from favorite
+            </button>
+          </div>
         </div>
       </div>
       <div class="similar-films">
         <div class="similar-films__title">Similar films</div>
         <div class="similar-films__items">
-          <div class="similar-films__item" v-for="film in similarMovies" :key="film.id">
-            <Item :image="film.poster_path" :title="film.title" :id="film.id"/>
-          </div>
+          <carousel :perPage="5">
+            <slide v-for="film in similarMovies" :key="film.id">
+              <div class="similar-films__item">
+                <Item :image="film.poster_path" :title="film.title" :id="film.id"/>
+              </div>
+            </slide>
+          </carousel>
         </div>
       </div>
     </div>
@@ -42,24 +57,35 @@
 <script>
 import axios from 'axios'
 import Item from './Item'
-
-const apiKey = '5fc1fc09c4439e9e384f1dce452ba65c'
+import { Carousel, Slide } from 'vue-carousel'
+import { favoriteList, apiKey } from '../store/store'
 
 export default {
   name: 'ItemPage',
   components: {
-    Item
+    Item,
+    Carousel,
+    Slide
   },
   data () {
     return {
       data: {},
-      similarMovies: []
+      similarMovies: [],
+      isFavorite: false
     }
   },
   props: {
     itemId: String
   },
   methods: {
+    addToFavoriteList () {
+      favoriteList.addFilm(this.data)
+      this.isFavorite = favoriteList.list.some(film => film.id === this.data.id)
+    },
+    removeFromFavoriteList () {
+      favoriteList.removeFilm(+this.itemId)
+      this.isFavorite = favoriteList.list.some(film => film.id === this.data.id)
+    },
     openGenreList (id) {
       this.$router.push({
         name: 'genre',
@@ -73,6 +99,7 @@ export default {
       axios.get(`https://api.themoviedb.org/3/movie/${self.itemId}?api_key=${apiKey}`)
         .then(function (response) {
           self.data = response.data
+          self.isFavorite = favoriteList.list.some(film => film.id === self.data.id)
         })
         .catch(function (error) {
           console.log(error)
@@ -96,11 +123,22 @@ export default {
 .film
   &__row
     display: flex
+    margin-bottom: 50px
   &__col
     width: 50%
-  &__poster
+  &__favorite
+    position: absolute
+    top: 10px
+    right: 0
+    background-color: #0874ff
+    color: white
+    padding: 5px
+  &__poster-container
     margin-right: 50px
-    max-width: 450px
+  &__poster
+    position: relative
+    max-width: 400px
+    margin: 0 auto
     img
       width: 100%
   &__genre
@@ -120,13 +158,32 @@ export default {
         height: 100%
         width: 1px
         background-color: #989588
+  &__btn
+    margin-top: 20px
+    button
+      transition: 0.3s
+      font-size: 10px
+      text-transform: uppercase
+      padding: 10px
+      background-color: transparent
+      cursor: pointer
+      border: 2px solid #0874ff
+      border-radius: 3px
+      font-weight: bold
+      color: #0874ff
+      &:hover
+        background-color: #0874ff
+        color: #fff
+      &.remove
+        border-color: #ff4f51
+        color: #ff4f51
+        &:hover
+          background-color: #ff4f51
+          color: #fff
 
 .similar-films
   &__title
     font-size: 20px
-  &__items
-    display: flex
-    flex-wrap: wrap
   &__item
     padding: 10px
     width: 150px

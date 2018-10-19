@@ -11,6 +11,7 @@
         :alt="title"
         v-if="!image"
       >
+      <span class="item__favorite" v-if="isFavorite"><i class="star"></i></span>
     </div>
     <div class="item__title">
       {{title}}
@@ -24,7 +25,8 @@ export default {
   props: {
     image: String,
     title: String,
-    id: Number
+    id: Number,
+    isFavorite: Boolean
   },
   methods: {
     openItemPage (id) {
@@ -50,6 +52,13 @@ export default {
         transform: scale(1.1)
   &__title
     transition: 0.3s
+  &__favorite
+    position: absolute
+    top: 10px
+    right: 0
+    background-color: #0874ff
+    color: white
+    padding: 5px
   &__poster
     overflow: hidden
     position: relative

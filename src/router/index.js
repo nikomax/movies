@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import MainPage from '@/components/MainPage'
 import ItemPage from '@/components/ItemPage'
 import GenrePage from '@/components/GenrePage'
+import FavoriteList from '@/components/FavoriteList'
 
 Vue.use(Router)
 
@@ -13,6 +14,11 @@ export default new Router({
       path: '/',
       name: 'MainPage',
       component: MainPage
+    },
+    {
+      path: '/favorite',
+      name: 'Favorite',
+      component: FavoriteList
     },
     {
       name: 'movies',
